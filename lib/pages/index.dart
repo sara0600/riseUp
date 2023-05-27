@@ -31,7 +31,7 @@ List<User> usersList=[];
   }
 
   fetchUser() async {
-    http.Response response;
+    http.Response? response;
     try {
       var url = Uri.parse('https://gorest.co.in/public/v2/users');
       response = await http.get(url);
@@ -39,8 +39,8 @@ List<User> usersList=[];
   catch(error){
       print(error);
   }
-    if (response.statusCode == 200) {
-      List items = jsonDecode(response.body);
+    if (response!.statusCode == 200) {
+      List items = jsonDecode(response!.body);
       setState(() {
         for (int i = 0; i < items.length; i++) {
           Users.addUser(items[i]);

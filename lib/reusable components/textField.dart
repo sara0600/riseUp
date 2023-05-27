@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:rise/theme/colours.dart';
 
 
-Widget buildTextField(String labelText,String placeHolder,TextEditingController controller,TextInputType textInputType){
+Widget buildTextField(String labelText,String placeHolder,TextEditingController controller,TextInputType textInputType,Function function){
+
   return Padding(
     padding: EdgeInsets.only(bottom: 30),
     child: TextFormField(
 
-      keyboardType: textInputType,
+     keyboardType: textInputType,
       controller:controller ,
       decoration: InputDecoration(
 

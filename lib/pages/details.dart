@@ -42,96 +42,99 @@ class _DetailsPageState extends State<DetailsPage> {
           onTap: (){
             FocusScope.of(context).unfocus();
           },
-          child: ListView(
+          child: Form(
+            key: formKey,
+            child: ListView(
 
-            children:[
-              buildTextField('Name', widget.name.toString(),nameController,TextInputType.name),
-          Padding(
+              children:[
+                buildTextField('Name', widget.name.toString(),nameController,TextInputType.name,(){}),
+            Padding(
 
-            padding: EdgeInsets.only(bottom: 30),
-            child: TextField(
+              padding: EdgeInsets.only(bottom: 30),
+              child: TextFormField(
 
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  hoverColor: primary,
-                  contentPadding: EdgeInsets.only(bottom: 5),
-                  labelText: 'ID',
-                  labelStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: primary,
-                  ),
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  hintText: widget.id.toString(),
-                  hintStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  )
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    hoverColor: primary,
+                    contentPadding: EdgeInsets.only(bottom: 5),
+                    labelText: 'ID',
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: primary,
+                    ),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintText: widget.id.toString(),
+                    hintStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    )
 
+                ),
               ),
             ),
-          ),
 
-              buildTextField('Email', widget.email.toString(),emailController,TextInputType.emailAddress),
-              buildTextField('Gender', widget.gender.toString(),genderController,TextInputType.text),
-              buildTextField('Status', widget.status.toString(),statusController,TextInputType.text),
-              SizedBox(height: 30,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
+                buildTextField('Email', widget.email.toString(),emailController,TextInputType.emailAddress,(){}),
+                buildTextField('Gender', widget.gender.toString(),genderController,TextInputType.text,(){}),
+                buildTextField('Status', widget.status.toString(),statusController,TextInputType.text,(){}),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
 
-                    onPressed: (){
-                   /*   if(formKey.currentState.validate()){
-                        print('validated');
+                      onPressed: (){
+                     /*   if(formKey.currentState.validate()){
+                          print('validated');
 
-                      }
-                      else{
-                        print('not validated');
-                      }*/
-                      String name =nameController.text.trim().isEmpty?widget.name:nameController.text.trim();
-                      String email =emailController.text.trim().isEmpty?widget.email:emailController.text.trim();
-                      String gender=genderController.text.trim().isEmpty?widget.gender:genderController.text.trim();
-                      String status=statusController.text.trim().isEmpty?widget.status:statusController.text.trim();
-                      print (name);
-                      if(name.isNotEmpty&&email.isNotEmpty&&gender.isNotEmpty&&status.isNotEmpty){
-
-
-                          int index= Users.users.indexWhere((user) => user.id==widget.id);
-
-                          Users.users[index]=User(id: widget.id,name: name,email: email,gender: gender,status: status);
-                          print(Users.users[index].name);
-
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              IndexPage()), (Route<dynamic> route) => false);
+                        }
+                        else{
+                          print('not validated');
+                        }*/
+                        String name =nameController.text.trim().isEmpty?widget.name:nameController.text.trim();
+                        String email =emailController.text.trim().isEmpty?widget.email:emailController.text.trim();
+                        String gender=genderController.text.trim().isEmpty?widget.gender:genderController.text.trim();
+                        String status=statusController.text.trim().isEmpty?widget.status:statusController.text.trim();
+                        print (name);
+                        if(name.isNotEmpty&&email.isNotEmpty&&gender.isNotEmpty&&status.isNotEmpty){
 
 
-                      }
-                    },
-                    child: Text(
-                      'save',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize:20,
-                        letterSpacing: 2,
-                        color: Colors.black87,
+                            int index= Users.users.indexWhere((user) => user.id==widget.id);
 
+                            Users.users[index]=User(id: widget.id,name: name,email: email,gender: gender,status: status);
+                            print(Users.users[index].name);
+
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                IndexPage()), (Route<dynamic> route) => false);
+
+
+                        }
+                      },
+                      child: Text(
+                        'save',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:20,
+                          letterSpacing: 2,
+                          color: Colors.black87,
+
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: primary,
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: primary,
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    ),
-                  ),
-                  SizedBox(width: 20,),
+                    SizedBox(width: 20,),
 
 
-                ],
-              )
+                  ],
+                )
 
-            ]
+              ]
+            ),
           ),
         ),
       ),
